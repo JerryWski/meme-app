@@ -1,11 +1,13 @@
 
+import Container from "./components/Container";
 import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <div> 
+    <div>
+      <Container/>
     </div>
-  );
-}
+  )
+};
 
 export default App;
