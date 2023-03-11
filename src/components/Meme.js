@@ -11,8 +11,15 @@ const Meme = () => {
 
   const [allMemeImages, setAllMemeImages] = useState(memesData);
 
-  let url;
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setMeme((prevMeme) => ({
+      ...prevMeme,
+      [name]: value,
+    }));
+  };
 
+  let url;
   const getImage = () => {
     const memesArray = allMemeImages.data.memes;
     const randomNumber = Math.floor(Math.random() * memesArray.length);
@@ -30,17 +37,33 @@ const Meme = () => {
           type="text"
           placeholder="Top text"
           className={styles.form_input}
+          name="topText"
+          value={meme.topText}
+          onChange={handleChange}
         />
         <input
           type="text"
           placeholder="Bottom text"
           className={styles.form_input}
+          name="bottomText"
+          onChange={handleChange}
+          value={meme.bottomText}
         />
         <button className={styles.form_button} onClick={getImage}>
           Get a new meme image 🖼
         </button>
       </div>
-      <img className={styles.img} src={meme.randomImage} alt="sdsd"></img>
+      <div className={styles.meme}>
+        <img
+          className={styles.meme_image}
+          src={meme.randomImage}
+          alt="sdsd"
+        ></img>
+        <h2 className={`${styles.top} ${styles.meme_text}`}>{meme.topText}</h2>
+        <h2 className={`${styles.bottom} ${styles.meme_text}`}>
+          {meme.bottomText}
+        </h2>
+      </div>
     </main>
   );
 };
